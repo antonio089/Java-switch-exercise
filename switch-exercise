@@ -1,0 +1,73 @@
+import java.util.Scanner;
+public class calories3 {
+	public static final int KalPerBar = 320;
+
+	public static void main(String[] args) {
+		Scanner keys = new Scanner(System.in);
+		String GenderLong;
+		int bodyWeight, height, age, intGender, lifestyleFactor = 0;
+
+		double totalCaloriesM, totalCaloriesF, barsNumberM, barsNumberF;
+	
+		
+		System.out.println("This program calcultes the number of chololate bars to consume in order to keep constant body weight.");
+		System.out.println("Type your Gender (M or F), bodyweight in Kgs, height in centimeters, age and lifestile.");
+		System.out.println("Lifestyle can be sedentary, moderately active, active (3-4 workout per week orreally active (daily workout)."
+				+ "Then press Enter.");
+				
+		String genderLower = keys.next();	
+		String gender = genderLower.toUpperCase();
+//		intGender = (int)gender.charAt(0) - 0;
+//		System.out.println(intGender); // M = 77; F = 70
+		
+		bodyWeight = keys.nextInt();
+		height = keys.nextInt();
+		age = keys.nextInt();
+		
+		
+				
+		String lifeSTYLE = keys.nextLine();
+		String lifestyle = lifeSTYLE.toLowerCase();
+		System.out.println("Your lifestile is " + lifestyle);
+		
+		switch(lifestyle) { // Here is the problem. Why this switch structure doesn't see the keyboard input? i.e. active
+		case "sedentary":
+			lifestyleFactor = 20;
+			break;
+		case "moderately active":
+			lifestyleFactor = 30;
+		case "active":
+			lifestyleFactor = 40;
+			break;
+		case "really active":
+			lifestyleFactor = 50;
+			break;
+		default:
+			System.out.println("Type a proper lifestile!");
+			lifestyleFactor = 0;
+			break;
+		} // end of the problem
+		
+		System.out.println("Your lifestileFactor is " + lifestyleFactor);
+		
+		
+		
+		if(gender.equals("M")) {
+		  GenderLong = "Male";
+		  totalCaloriesM = (655 + (9.6 * bodyWeight) + (1.8 * height) + (4.7 * age)) / 100 * lifestyleFactor;
+		  barsNumberM = totalCaloriesM / KalPerBar;
+		  System.out.println("You are " + GenderLong + " and you should eat " + barsNumberM + " chocolate bars.");
+				
+		} else if(gender.equals("F")) {
+			GenderLong = "Female";
+			totalCaloriesF = (66 + (13.8 * bodyWeight) + (5.0 * height) + (6.8 * age)) / 100 * lifestyleFactor;
+			barsNumberF = totalCaloriesF / KalPerBar;
+			System.out.println("You are " + GenderLong + " and you should eat " + barsNumberF + " chocolate bars.");
+
+		} else {
+			GenderLong = "Error!";
+			totalCaloriesM = 0;
+			totalCaloriesF = 0;
+		}
+	}
+}
